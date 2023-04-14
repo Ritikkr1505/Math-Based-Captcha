@@ -1,0 +1,19 @@
+import random
+from captcha.image import ImageCaptcha
+
+num1 = random.randint(0, 10)
+num2 = random.randint(0, 10)
+operator = random.choice(['+', '-', '*'])
+equation = f"{num1} {operator} {num2}"
+result = eval(equation)
+
+captcha = ImageCaptcha()
+captcha_text = f"{equation} = ?"
+captcha_image = captcha.generate(captcha_text)
+captcha_image.show()
+
+user_input = input("Enter the result of the math equation: ")
+if int(user_input) == result:
+    print("You have successfully passed the captcha!")
+else:
+    print("Captcha failed. Please try again.")
